@@ -1,0 +1,41 @@
+package springTest.web.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
+
+@Service
+public class PageMessageService {
+	public static String SUCCESS = "alert-success";
+	public static String INFO = "alert-info";
+	public static String WARNING = "alert-warning";
+	public static String DANGER = "alert-danger";
+	
+	private String alertcolor;
+	private String message;
+	
+	public static ModelAndView addPageMessage(ModelAndView mv, String alertcolor, String message){
+		PageMessageService pms = new PageMessageService();
+		pms.setAlertcolor(alertcolor);
+		pms.setMessage(message);
+		mv.addObject("pagemessage", pms);
+		
+		return mv;
+	}
+
+	public String getAlertcolor() {
+		return alertcolor;
+	}
+
+	public void setAlertcolor(String alertcolor) {
+		this.alertcolor = alertcolor;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+}

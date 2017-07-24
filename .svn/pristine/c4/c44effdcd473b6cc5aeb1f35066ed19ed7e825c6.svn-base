@@ -1,0 +1,45 @@
+package springTest.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.RecommendService;
+
+@Controller
+public class RecommendController {
+
+	@Autowired
+	private RecommendService rs;
+
+	@RequestMapping(value="/addrecommend")
+	public ModelAndView addRecommend(HttpServletRequest request, String id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			rs.addRecommend(new Integer(id).intValue());
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=recommends");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console?tabid=blogs");
+		}	
+		return mv;
+	}
+	
+	@RequestMapping(value="/delrecommend")
+	public ModelAndView delRecommend(HttpServletRequest request, String id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			rs.delRecommendByBlogID(new Integer(id).intValue());
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=recommends");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console?tabid=recommends");
+		}	
+		return mv;
+	}
+}

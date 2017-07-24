@@ -1,0 +1,32 @@
+package springTest.web.dao;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.AdminEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class AdminDAO {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public String getpw(){
+		String HQL = "from AdminEntity";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		AdminEntity ae = (AdminEntity) q.uniqueResult();
+		return ae.getPassword();
+	}
+	
+	public boolean setpw(String pw){
+		String HQL = "update AdminEntity ae set ae.password=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setString(0, pw);
+		return q.executeUpdate()>=0;
+	}
+}

@@ -1,0 +1,56 @@
+package springTest.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.BlogService;
+import springTest.web.service.ClassifyService;
+
+@Controller
+public class ClassifyController {
+
+	@Autowired
+	private ClassifyService service;
+
+	@Autowired
+	private BlogService bs;
+
+	@RequestMapping(value="/saveclassify")
+	public ModelAndView addClassify(String item, HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			if(null!=item && item.trim().length()!=0){
+				service.addClassify(item);
+			}
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=classifies");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console?tabid=classifies");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value="/delclassify")
+	public ModelAndView delClassify(HttpServletRequest request, int id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			if(bs.getBloglist(new Integer(id).toString(), "1", "1").size()>0){
+				mv.setViewName("failed");
+				mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=classifies&error=由于该分类下至少有一篇文章存在，所以无法删除该分类。");
+			}else{
+				service.delClassify(id);
+				mv.setViewName("sucess");
+				mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=classifies");
+			}
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console?tabid=classifies");
+		}
+		return mv;
+	}
+}

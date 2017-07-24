@@ -1,0 +1,40 @@
+package springTest.web.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.BlogEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class BlogDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@SuppressWarnings("unchecked")
+	public List<BlogEntity> getBlogList(){
+		String HQL = "from BlogEntity";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		return q.list();
+	}
+	
+	public void addBlog(BlogEntity blog){
+		sessionFactory.getCurrentSession().save(blog);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public  List<BlogEntity> getBolg(String id){
+		String HQL = "from BlogEntity b where b.id = ?";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setString(0, id);
+		return q.list();
+	}
+	
+}

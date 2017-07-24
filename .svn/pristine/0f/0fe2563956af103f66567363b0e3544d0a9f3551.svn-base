@@ -1,0 +1,39 @@
+package springTest.web.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.ClassifyEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class ClassifyDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public ClassifyEntity viewClassify(int id){
+		String HQL = "from ClassifyEntity c where c.id = ?";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setInteger(0, id);
+		return (ClassifyEntity) q.uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ClassifyEntity> listClassify(){
+		String HQL = "from ClassifyEntity";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		return q.list();
+	}
+	
+	public void addClassify(ClassifyEntity entity){
+		sessionFactory.getCurrentSession().save(entity);
+	}
+	
+}

@@ -1,0 +1,118 @@
+package springTest.web.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.BlogEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class BlogDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	/**
+	 * 列出文章列表，带有分页功能
+	 * @param tarpage 目标页数
+	 * @param pagesize 每页文章数
+	 * @param classifyid 文章分类id，0表示全部文章
+	 * @return 符合条件的文章列表
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BlogEntity> getBlogList(int tarpage, int pagesize, int classifyid){
+		StringBuffer HQL = new StringBuffer("from BlogEntity b ");
+		if(classifyid!=0){
+			HQL.append("where b.classify.id=?");
+		}
+HQL.append(" order by b.blogDate desc"); 
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL.toString());
+		q.setFirstResult((tarpage-1)*pagesize);
+		q.setMaxResults(pagesize);
+		if(classifyid!=0){
+			q.setInteger(0, classifyid);
+		}
+		return q.list();
+	}
+	
+	/**
+	 * 得到数据库中的文章总数
+	 * @param classifyid  文章分类，0代表全部文章
+	 * @return 文章总数
+	 */
+	public int getBolgNum(int classifyid){
+		StringBuffer HQL =  new StringBuffer(" select count(*) from BlogEntity b ");
+		if(classifyid!=0){
+			HQL.append("where b.classify.id=?");
+		}
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL.toString());
+		if(classifyid!=0){
+			q.setInteger(0, classifyid);
+		}
+		return new Integer(q.uniqueResult().toString()).intValue();
+	}
+	
+	/**
+	 * 保存文章
+	 * @param blog 文章对象
+	 */
+	public void addBlog(BlogEntity blog){
+		sessionFactory.getCurrentSession().save(blog);
+	}
+	
+	/**
+	 * 获取单个文章详情
+	 * @param l 文章id
+	 * @return 文章详情对象
+	 */
+	public  BlogEntity getBolg(long l){
+		String HQL = "from BlogEntity b where b.id = ?";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setInteger(0,(int) l);
+		return (BlogEntity) q.uniqueResult();
+	}
+	
+	/**
+	 * 获取最新的5篇博文列表
+	 * @return 最新的5篇博文
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BlogEntity> getTop5Blog(){
+		String HQL = "from BlogEntity b order by b.views desc";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setMaxResults(5);
+		return q.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Object[]> getComm5Blogs(){
+		String SQL = "select bc.T_BLOG_id, b.blogTitle, count(bc.comments_id) as num FROM t_blog_t_comment bc inner join t_blog b on b.id = bc.T_BLOG_id group by bc.T_BLOG_id order by num desc";		
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(SQL);		
+		return ((ArrayList<Object[]>) q.list());
+		
+	}
+	
+	public void updateBlog(BlogEntity blog){
+		sessionFactory.getCurrentSession().update(blog);
+	}
+	
+	public void delBlog(int id){
+		BlogEntity be = getBolg(id);
+		sessionFactory.getCurrentSession().delete(be);
+	}
+	
+	public void addViews(int id){
+		String HQL = "update BlogEntity b set b.views = b.views+1 where b.id=?";
+		Query q =  sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setInteger(0, id);
+		q.executeUpdate();
+	}
+	
+}

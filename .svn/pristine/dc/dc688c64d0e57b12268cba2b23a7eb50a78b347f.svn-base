@@ -1,0 +1,152 @@
+<%@ page language="java"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>左侧的导航</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta charset="utf-8">
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<div class="panel-group" id="accordion2">
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="#"><h4><span class="glyphicon glyphicon-home"></span> 首页</h4></a></li>
+			</ul>
+					
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#needplan">
+					<span class="glyphicon glyphicon-calendar"></span> 需求计划预测管理
+				</div>
+				<div id="needplan" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">市场预测管理</a></li>
+							<li><a href="#">订单集合管理</a></li>
+							<li><a href="#">个性化定制管理</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#servmession">
+					<span class="glyphicon glyphicon-tasks"></span> 服务任务定义管理
+				</div>
+				<div id="servmession" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">服务任务分解定义</a></li>
+							<li><a href="#">服务任务约束定义</a></li>
+							<li><a href="#">服务任务过程定义</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#servservres">
+					<span class="glyphicon glyphicon-cloud-upload"></span> 服务器端服务资源管理
+				</div>
+				<div id="servservres" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">资源类管理</a></li>
+							<li><a href="#">概念语义网络管理</a></li>
+							<li><a href="#">资源对象注册</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#clivservres">
+					<span class="glyphicon glyphicon-cloud-download"></span> 客户端服务资源管理
+				</div>
+				<div id="clivservres" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">服务资源对象定义</a></li>
+							<li><a href="#">服务资源发布</a></li>
+							<li><a href="#">服务资源更新</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#servresplan">
+					<span class="glyphicon glyphicon-piggy-bank"></span> 服务资源配置管理
+				</div>
+				<div id="servresplan" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">服务资源发现</a></li>
+							<li><a href="#">服务资源评价</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#veluenet">
+					<span class="glyphicon glyphicon-globe"></span> 协同与价值网构建管理
+				</div>
+				<div id="veluenet" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">资源类管理</a></li>
+							<li><a href="#">概念语义网络管理</a></li>
+							<li><a href="#">资源对象注册</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#simmanage">
+					<span class="glyphicon glyphicon-knight"></span> 仿真管理
+				</div>
+				<div id="simmanage" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">仿真输入管理</a></li>
+							<li><a href="#">仿真运行管理</a></li>
+							<li><a href="#">仿真结果评价与优化管理</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-info">
+				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#sysopt">
+					<span class="glyphicon glyphicon-cog"></span> 用户管理
+				</div>
+				<div id="sysopt" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#">用户注册</a></li>
+							<li><a href="#">身份验证</a></li>
+							<li><a href="#">权限分配</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-right">
+					<a class="btn btn-primary btn-sm" href="#top"><span class="glyphicon glyphicon-chevron-up"></span> 回到顶部</a>
+		</div>
+
+	</body>
+</html>

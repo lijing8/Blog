@@ -1,0 +1,22 @@
+package springTest.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import springTest.web.service.ClassifyService;
+
+@Controller
+public class ClassifyController {
+
+	@Autowired
+	private ClassifyService service;
+
+	@RequestMapping(value="/saveclassify")
+	public String addClassify(String item){
+		if(null!=item && item.trim().length()!=0){
+			service.addClassify(item);
+		}
+		return "classifyeditor";
+	}
+}

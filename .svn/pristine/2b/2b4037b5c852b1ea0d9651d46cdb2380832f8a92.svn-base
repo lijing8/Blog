@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>云环境下汽车制造业供应链服务发现与协同机制仿真平台</title>
+
+<link href="favicon.ico" rel="icon" type="image/x-icon" />
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet"
+	href="css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet"
+	href="css/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- 自定义主题文件 -->
+<link rel="stylesheet" href="css/MainCSS.css">
+
+</head>
+<body>
+	<!-- 
+		整体页面分为三行：
+		
+		第一行一个12格全占作为head题头 
+		第二行左侧一个2格作为sidenavbar左侧导航栏；一个10格作为main页面，主要显示页面
+		第三行一个12格全占作为foot页脚
+		-->
+
+	<div class="container-fluid">
+		<!--第一行 header-->
+		<div class="row">
+			<div class="container-fluid">
+				<!--第一行 header-->
+				<div class="row header">
+					<div class="col-xs-1">
+						<h2>logo</h2>
+					</div>
+					<div class="col-xs-9 header-title">
+						<h1>
+							云环境下汽车制造业供应链服务发现与协同机制仿真平台<small>副标题</small>
+						</h1>
+					</div>
+
+					<div class="col-xs-2 text-right">
+						<ol class="breadcrumb">
+							<li><small><span
+									class="glyphicon glyphicon-user text-muted"></span> <a href="#">登陆</a></small></li>
+							<li><small><a href="#">注册</a></small></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--第二行 内容-->
+		<div class="row" id="main-part">
+			<!--左侧 导航-->
+			<div class="col-xs-2 ">
+				<div class="pinned">
+					<div class="panel-group" id="accordion2">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#"><h4>
+										<span class="glyphicon glyphicon-home"></span> 首页
+									</h4></a></li>
+						</ul>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#needplan">
+								<span class="glyphicon glyphicon-calendar"></span> 需求计划预测管理
+							</div>
+							<div id="needplan" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">市场预测管理</a></li>
+										<li><a href="#">订单集合管理</a></li>
+										<li><a href="#">个性化定制管理</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#servmession">
+								<span class="glyphicon glyphicon-tasks"></span> 服务任务定义管理
+							</div>
+							<div id="servmession" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">服务任务分解定义</a></li>
+										<li><a href="#">服务任务约束定义</a></li>
+										<li><a href="#">服务任务过程定义</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#servservres">
+								<span class="glyphicon glyphicon-cloud-upload"></span>
+								服务器端服务资源管理
+							</div>
+							<div id="servservres" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">资源类管理</a></li>
+										<li><a href="#">概念语义网络管理</a></li>
+										<li><a href="#">资源对象注册</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#clivservres">
+								<span class="glyphicon glyphicon-cloud-download"></span>
+								客户端服务资源管理
+							</div>
+							<div id="clivservres" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">服务资源对象定义</a></li>
+										<li><a href="#">服务资源发布</a></li>
+										<li><a href="#">服务资源更新</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#servresplan">
+								<span class="glyphicon glyphicon-piggy-bank"></span> 服务资源配置管理
+							</div>
+							<div id="servresplan" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">服务资源发现</a></li>
+										<li><a href="#">服务资源评价</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#veluenet">
+								<span class="glyphicon glyphicon-globe"></span> 协同与价值网构建管理
+							</div>
+							<div id="veluenet" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">资源类管理</a></li>
+										<li><a href="#">概念语义网络管理</a></li>
+										<li><a href="#">资源对象注册</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#simmanage">
+								<span class="glyphicon glyphicon-knight"></span> 仿真管理
+							</div>
+							<div id="simmanage" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">仿真输入管理</a></li>
+										<li><a href="#">仿真运行管理</a></li>
+										<li><a href="#">仿真结果评价与优化管理</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-info">
+							<div class="panel-heading" data-toggle="collapse"
+								data-parent="#accordion2" href="#sysopt">
+								<span class="glyphicon glyphicon-cog"></span> 用户管理
+							</div>
+							<div id="sysopt" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<li><a href="#">用户注册</a></li>
+										<li><a href="#">身份验证</a></li>
+										<li><a href="#">权限分配</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="text-right">
+						<a class="btn btn-primary btn-sm" href="#top"><span
+							class="glyphicon glyphicon-chevron-up"></span> 回到顶部</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-8">
+				<!--面包屑导航-->
+				<ol class="breadcrumb pinned">
+					<li class="active"><span class="glyphicon glyphicon-home"></span>
+						首页</li>
+				</ol>
+				<!-- step2:根据当前编辑页面的具体内容编辑此处 -->
+				<h1>概览</h1>
+				<p>这是一个项目前台页面的框架页面，是一个静态原型页面，主要起到以下作用</p>
+				<ul>
+					<li>展示页面效果</li>
+					<li>介绍开发前台页面（静态原型）的过程</li>
+					<li>展示各种组件效果</li>
+					<li>介绍各种组件使用代码</li>
+				</ul>
+				<h1>页面效果展示</h1>
+				<p>这个静态原型页面主要是利用基于jquery的前台页面框架Bootstrap以及jquery.pin完成，其主要的优势有</p>
+				<ul>
+					<li>无需美化，bootstrap已经将美工的任务完成的很好，包括各种页面元素、控件、按钮、表格、面板等等</li>
+					<li>动态效果，通过使用Bootstrap以及jquery.pin达到了类似导航栏折叠，导航条、导航栏浮动等效果</li>
+					<li>敏捷开发，将前台jsp页面需要开发的代码量急剧缩减，前台开发只需要根据需求自行完成差异部分</li>
+				</ul>
+				<h1>开发前台页面（静态原型）的过程</h1>
+				<p>复制framework.jsp到原文件夹，并将其重命名，例如：重命名为“a.jsp”</p>
+				<ol>
+					<li>用文本编辑器（推荐eclipse或者notepad++）打开a.jsp</li>
+					<li>修改面包屑导航条内容：找到其中代码<code>&lt;!--
+							step1:根据当前编辑页面的具体路径层级编辑此处 --&gt;</code>，并根据注释修改该处。
+					</li>
+					<li>写入主要页面内容：找到其中代码<code>&lt;!--
+							step2:根据当前编辑页面的具体内容编辑此处 --&gt;</code>，并根据注释修改该处。
+					</li>
+					<li>保存并使用浏览器测试页面（推荐使用firefox作为测试工具，可以单步跟踪代码）</li>
+				</ol>
+				<h1>各组件效果及代码演示</h1>
+				<h2>文本标题</h2>
+				<p>各个文本标题的文字大小及代码</p>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h1>
+							h1标题文字大小、间距及效果<small>副标题效果</small>
+						</h1>
+						<h2>
+							h2标题文字大小、间距及效果<small>副标题效果</small>
+						</h2>
+						<h3>
+							h3标题文字大小、间距及效果<small>副标题效果</small>
+						</h3>
+						<h4>
+							h4标题文字大小、间距及效果<small>副标题效果</small>
+						</h4>
+						<pre>
+<code class="language-html" data-lang="html">&lt;h1&gt;h1标题文字大小、间距及效果&lt;small&gt;副标题效果&lt;/small&gt;&lt;/h1&gt;
+&lt;h2&gt;h2标题文字大小、间距及效果&lt;small&gt;副标题效果&lt;/small&gt;&lt;/h2&gt;
+&lt;h3&gt;h3标题文字大小、间距及效果&lt;small&gt;副标题效果&lt;/small&gt;&lt;/h3&gt;
+&lt;h4&gt;h4标题文字大小、间距及效果&lt;small&gt;副标题效果&lt;/small&gt;&lt;/h4&gt;</code>
+						</pre>
+					</div>
+				</div>
+				<h2>面板</h2>
+				<p>面板可以方便的将元素嵌套其中，并画出一个明显边界</p>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>仅含内容的面板</h3>
+						<div class="panel panel-default">
+							<div class="panel-body">仅含内容的面板示例</div>
+						</div>
+						<pre>
+<code class="language-html" data-lang="html">&lt;div class="panel panel-default"&gt;
+	&lt;div class="panel-body"&gt;
+		仅含内容的面板示例
+	&lt;/div&gt;
+&lt;/div&gt;</code>
+						</pre>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>含标题及内容的面板</h3>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">含标题及内容的面板示例——标题</h4>
+							</div>
+							<div class="panel-body">含标题及内容的面板示例——内容</div>
+						</div>
+						<pre>
+<code class="language-html" data-lang="html">&lt;div class="panel panel-default"&gt;
+	&lt;div class="panel-heading"&gt;
+		含标题及内容的面板示例——标题
+	&lt;/div&gt;
+	&lt;div class="panel-body"&gt;
+		含标题及内容的面板示例——内容
+	&lt;/div&gt;
+&lt;/div&gt;</code>
+						</pre>
+					</div>
+				</div>
+
+
+				<h2>表单</h2>
+				<p>各种表单控件的布局方式以及代码</p>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>基本表单布局</h3>
+						一个input控件，与一个label绑定为一组显示<br>
+						使用方法：指定class属性为form-group的div标签包裹一个lable标签和一个控件即可，
+						<code>&lt;div class="form-group"&gt;</code>
+						<br> <br>
+						<form>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email地址</label> <input
+									type="email" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter地址">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">密码</label> <input
+									type="password" class="form-control" id="exampleInputPassword1"
+									placeholder="密码">
+							</div>
+							<div class="form-group">
+								<label for="textarea">多行文本</label>
+								<textarea class="form-control" rows="3" id="textarea"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputFile">打开文件</label> <input type="file"
+									id="exampleInputFile">
+							</div>
+							<div class="form-group">
+								<label>复选框</label>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框1
+									</label>
+								</div>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框2
+									</label>
+								</div>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框3
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>单选框</label>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1" checked> 单选框1
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios2" value="option2" checked> 单选框2
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios3" value="option3" checked> 单选框3
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>单选下拉列表</label> <select class="form-control">
+									<option>选项1</option>
+									<option>选项2</option>
+									<option>选项3</option>
+									<option>选项4</option>
+									<option>选项5</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>多选下拉列表</label> <select multiple class="form-control">
+									<option>选项1</option>
+									<option>选项2</option>
+									<option>选项3</option>
+									<option>选项4</option>
+									<option>选项5</option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-default">提交</button>
+						</form>
+						<br>
+						<pre>
+<code class="language-html" data-lang="html">&lt;form&gt;
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputEmail1"&gt;Email地址&lt;/label&gt;
+		&lt;input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter地址"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputPassword1"&gt;密码&lt;/label&gt;
+		&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="textarea"&gt;多行文本&lt;/label&gt;
+		&lt;textarea class="form-control" rows="3" id="textarea"&gt;&lt;/textarea&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputFile"&gt;打开文件&lt;/label&gt;
+		&lt;input type="file" id="exampleInputFile"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;复选框&lt;/label&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框1
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框2
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框3
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;单选框&lt;/label&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked&gt;
+				单选框1
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked&gt;
+				单选框2
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" checked&gt;
+				单选框3
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;单选下拉列表&lt;/label&gt;
+		&lt;select class="form-control"&gt;
+			&lt;option&gt;选项1&lt;/option&gt;
+			&lt;option&gt;选项2&lt;/option&gt;
+			&lt;option&gt;选项3&lt;/option&gt;
+			&lt;option&gt;选项4&lt;/option&gt;
+			&lt;option&gt;选项5&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;多选下拉列表&lt;/label&gt;
+		&lt;select multiple class="form-control"&gt;
+			&lt;option&gt;选项1&lt;/option&gt;
+			&lt;option&gt;选项2&lt;/option&gt;
+			&lt;option&gt;选项3&lt;/option&gt;
+			&lt;option&gt;选项4&lt;/option&gt;
+			&lt;option&gt;选项5&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+
+	&lt;button type="submit" class="btn btn-default"&gt;提交&lt;/button&gt;
+
+&lt;/form&gt;</code>
+						</pre>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>内联表单布局</h3>
+						尽量将表当放入同一行中，适用于表单控件比较少的情况<br>
+						使用方法：指定form标签class属性为form-inline即可，
+						<code>&lt;form class="form-inline"&gt;</code>
+						<br> <br>
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email地址</label> <input
+									type="email" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter地址">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">密码</label> <input
+									type="password" class="form-control" id="exampleInputPassword1"
+									placeholder="密码">
+							</div>
+							<div class="form-group">
+								<label for="textarea">多行文本</label>
+								<textarea class="form-control" rows="3" id="textarea"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputFile">打开文件</label> <input type="file"
+									id="exampleInputFile">
+							</div>
+							<div class="form-group">
+								<label>复选框</label>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框1
+									</label>
+								</div>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框2
+									</label>
+								</div>
+								<div class="checkbox">
+									<label> <input type="checkbox"> 复选框3
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>单选框</label>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1" checked> 单选框1
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios2" value="option2" checked> 单选框2
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios3" value="option3" checked> 单选框3
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>单选下拉列表</label> <select class="form-control">
+									<option>选项1</option>
+									<option>选项2</option>
+									<option>选项3</option>
+									<option>选项4</option>
+									<option>选项5</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>多选下拉列表</label> <select multiple class="form-control">
+									<option>选项1</option>
+									<option>选项2</option>
+									<option>选项3</option>
+									<option>选项4</option>
+									<option>选项5</option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-default">提交</button>
+						</form>
+						<br>
+						<pre>
+<code class="language-html" data-lang="html">&lt;form class="form-inline"&gt;
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputEmail1"&gt;Email地址&lt;/label&gt;
+		&lt;input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter地址"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputPassword1"&gt;密码&lt;/label&gt;
+		&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="textarea"&gt;多行文本&lt;/label&gt;
+		&lt;textarea class="form-control" rows="3" id="textarea"&gt;&lt;/textarea&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label for="exampleInputFile"&gt;打开文件&lt;/label&gt;
+		&lt;input type="file" id="exampleInputFile"&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;复选框&lt;/label&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框1
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框2
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="checkbox""&gt;
+			&lt;label&gt;
+				&lt;input type="checkbox"&gt; 复选框3
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;单选框&lt;/label&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked&gt;
+				单选框1
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked&gt;
+				单选框2
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="radio"&gt;
+			&lt;label&gt;
+				&lt;input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" checked&gt;
+				单选框3
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;单选下拉列表&lt;/label&gt;
+		&lt;select class="form-control"&gt;
+			&lt;option&gt;选项1&lt;/option&gt;
+			&lt;option&gt;选项2&lt;/option&gt;
+			&lt;option&gt;选项3&lt;/option&gt;
+			&lt;option&gt;选项4&lt;/option&gt;
+			&lt;option&gt;选项5&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+
+	&lt;div class="form-group"&gt;
+		&lt;label&gt;多选下拉列表&lt;/label&gt;
+		&lt;select multiple class="form-control"&gt;
+			&lt;option&gt;选项1&lt;/option&gt;
+			&lt;option&gt;选项2&lt;/option&gt;
+			&lt;option&gt;选项3&lt;/option&gt;
+			&lt;option&gt;选项4&lt;/option&gt;
+			&lt;option&gt;选项5&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/div&gt;
+
+	&lt;button type="submit" class="btn btn-default"&gt;提交&lt;/button&gt;
+
+&lt;/form&gt;</code>
+						</pre>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>水平表单布局</h3>
+						将一个from-group重的一个lable标签和一个控件显示在同一行中<br>
+						需要配置label与input各自占用横向宽度格数，主页面部分总宽度为10<br>
+						使用方法：指定form标签class属性为form-horizontal即可，
+						<code>&lt;form class="form-horizontal"&gt;</code>
+						；同时需要指定每个lable和input所占格子宽度<br> <br>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+								<div class="col-sm-8">
+									<input type="email" class="form-control" id="inputEmail3"
+										placeholder="邮箱">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control" id="inputPassword3"
+										placeholder="密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-8">
+									<div class="checkbox">
+										<label> <input type="checkbox"> 记住我
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-8">
+									<button type="submit" class="btn btn-default">登录</button>
+								</div>
+							</div>
+						</form>
+						<br>
+						<pre>
+<code class="language-html" data-lang="html">&lt;form class="form-horizontal"&gt;
+	&lt;div class="form-group"&gt;
+		&lt;label for="inputEmail3" class="col-sm-2 control-label"&gt;邮箱&lt;/label&gt;
+		&lt;div class="col-sm-8"&gt;
+			&lt;input type="email" class="form-control" id="inputEmail3" placeholder="邮箱"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="form-group"&gt;
+		&lt;label for="inputPassword3" class="col-sm-2 control-label"&gt;密码&lt;/label&gt;
+		&lt;div class="col-sm-8"&gt;
+			&lt;input type="password" class="form-control" id="inputPassword3" placeholder="密码"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="form-group"&gt;
+		&lt;div class="col-sm-offset-2 col-sm-8"&gt;
+			&lt;div class="checkbox"&gt;
+				&lt;label&gt;
+					&lt;input type="checkbox"&gt; 记住我
+				&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="form-group"&gt;
+		&lt;div class="col-sm-offset-2 col-sm-8"&gt;
+			&lt;button type="submit" class="btn btn-default"&gt;登录&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/form&gt;</code>
+						</pre>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+		<!--第三行 foot-->
+		<div class="row">
+			<div class="bg-info col-xs-12 text-center" id="footrow">
+				<small class="">页脚</small>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- PIN ALL THE THINGS! -->
+	<script src="js/jquery.pin.min.js"></script>
+	<script>
+		$(".pinned").pin({
+			containerSelector : "#main-part",
+			minWidth : 940,
+			padding : {
+				top : 15
+			}
+		});
+	</script>
+
+
+</body>
+</html>

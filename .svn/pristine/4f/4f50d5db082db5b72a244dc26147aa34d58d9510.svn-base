@@ -1,0 +1,74 @@
+package springTest.web.entity;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="T_BLOG")
+public class BlogEntity {
+	
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id;
+	
+	@Column(length=80)
+	private String blogTitle;
+	
+	@Column(length=10000)
+	private String blogBody;
+	
+	@Column
+	private Date blogDate;
+	
+	@Column(length=300)
+	private String blogAbstract;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getBlogTitle() {
+		return blogTitle;
+	}
+
+	public void setBlogTitle(String blogTitle) {
+		this.blogTitle = blogTitle;
+	}
+
+	public String getBlogBody() {
+		return blogBody;
+	}
+
+	public void setBlogBody(String blogBody) {
+		this.blogBody = blogBody;
+	}
+
+	public Date getBlogDate() {
+		return blogDate;
+	}
+
+	public void setBlogDate(Date blogDate) {
+		this.blogDate = blogDate;
+	}
+
+	public String getBlogAbstract() {
+		return blogAbstract;
+	}
+
+	public void setBlogAbstract(String blogAbstract) {
+		this.blogAbstract = blogAbstract;
+	}
+
+}

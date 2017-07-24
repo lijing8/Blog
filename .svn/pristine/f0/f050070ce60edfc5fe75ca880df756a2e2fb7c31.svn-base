@@ -1,0 +1,121 @@
+package springTest.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.BlogService;
+import springTest.web.service.ClassifyService;
+
+@Controller
+//@RequestMapping(value="/blog")
+public class BlogController {
+	
+	@Autowired
+	private BlogService service;
+	
+	@Autowired
+	private ClassifyService classifyService;
+	
+	/**
+	 * 添加文章连接地址
+	 * @return view:blogeditor; model:{文章分类列表}
+	 */
+	@RequestMapping(value="/addblog")
+	public ModelAndView addBlog(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			mv.setViewName("blogeditor");
+			mv.addObject("classify", classifyService.listClassify());	
+			mv.addObject("isedit", "false");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/addblog");
+		}
+			
+		return mv;
+	}
+	
+	@RequestMapping(value="/editblog")
+	public ModelAndView editBlog(HttpServletRequest request, int id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+		mv.setViewName("blogeditor");
+		mv.addObject("classify", classifyService.listClassify());	
+		mv.addObject("oldBlog", service.getBlog(id));
+		mv.addObject("isedit", "true");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/addblog");
+		}
+		return mv;
+	}
+
+	/**
+	 * 保存文章链接地址
+	 * @param classifyId 文章分类id
+	 * @param title 标题
+	 * @param textbody 内容
+	 * @param isedit 是否是编辑状态的标志，true为编辑状态，需要update，false 为新增状态
+	 * @param request request
+	 * @return  view: sucess; model:{跳转地址:首页}
+	 */
+	@RequestMapping(value="/saveblog")
+	public ModelAndView saveBlog(int classifyId , String title,String textbody,String isedit, int blogid, HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			service.saveBlog(classifyId, title, textbody, blogid, isedit);
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=blogs");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/editblog?id="+blogid);
+		}		
+		return mv;
+	}
+	
+
+	@RequestMapping(value="/index.html")
+	public ModelAndView listBlog(String tarpage, String classifyid){
+		if(null==tarpage || tarpage.trim().length()==0){
+			tarpage="1";
+		}
+		if(null==classifyid || classifyid.trim().length()==0){
+			classifyid="0";
+		}
+		ModelAndView mv = new ModelAndView("bloglister");
+		mv.addObject("result", service.getBloglist(classifyid,tarpage, "10"));
+		mv.addObject("top5",service.getTop5Blog());
+		mv.addObject("maxpage", service.getMaxPage(classifyid,"10"));
+		mv.addObject("tarpage",tarpage);
+		mv.addObject("classifyid",new Integer(classifyid).intValue());
+		mv.addObject("classify", classifyService.listClassify());
+		return mv;
+	}
+	
+	@RequestMapping(value="/viewblog")
+	public ModelAndView viewblog(int id){
+		service.addviews(id);
+		ModelAndView mv = new ModelAndView("blogviewer");
+		mv.addObject("blog", service.getBlog(id));
+		mv.addObject("classify", classifyService.listClassify());
+		return mv;
+	}
+	
+	@RequestMapping(value="/delblog")
+	public ModelAndView delBlog(HttpServletRequest request, int id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			service.delBlog(id);
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console");
+		}
+		return mv;
+	}
+}

@@ -1,0 +1,24 @@
+package springTest.web.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+
+
+@Controller
+public class HelloWorldController {
+
+	@RequestMapping(value="/test1/helloworld")
+	public ModelAndView handleRequest() {
+		System.out.println("---------------------成功-------------------------");
+		String rst = "*&*&*&*&*&*&*&*welcome*&*&*&*&*&*&*&*---------------------成功-------------------------";
+		
+		ModelAndView ma = new ModelAndView();
+		ma.setViewName("/welcome");
+		ma.addObject("result", rst);
+		
+		return ma;
+	}
+
+}

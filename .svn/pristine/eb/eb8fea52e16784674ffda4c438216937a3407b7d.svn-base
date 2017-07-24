@@ -1,0 +1,70 @@
+package springTest.web.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.entity.HelloWorldEntity;
+import springTest.web.service.HellowWorldService;
+
+
+
+@Controller
+@RequestMapping(value="/test1")
+public class HelloWorldController {
+	
+	@Autowired
+	private HellowWorldService hellowWorldService;
+
+	@RequestMapping(value="/helloworld.do")
+	public ModelAndView gethelloworld() {		
+		List<HelloWorldEntity> rst = hellowWorldService.getHelloWorld();
+		ModelAndView ma = new ModelAndView();
+		ma.setViewName("/helloworld-list");
+		ma.addObject("result", rst);
+		return ma;
+	}
+	
+	@RequestMapping(value="/addhelloworld.do")
+	public ModelAndView addhelloworld(String message){
+		if(message==null || message.trim().length()==0){
+			ModelAndView ma = new ModelAndView();
+			ma.setViewName("/helloworld-edit");
+			ma.addObject("error", "欢迎信息不能为空");
+			ma.addObject("message",message);
+			return ma;
+		}
+		hellowWorldService.addHelloWorld(message);
+		return gethelloworld();
+	}
+	
+	@RequestMapping(value="/delhelloworld.do")
+	public ModelAndView delhelloworld(String id){
+		hellowWorldService.delHelloWorld(id);
+		return gethelloworld();
+	}
+	
+	@RequestMapping(value="/infhelloworld.do")
+	public ModelAndView infhelloworld(String id){
+		ModelAndView ma = new ModelAndView();
+		ma.setViewName("/helloworld-info");
+		ma.addObject("entity", hellowWorldService.infHelloworld(id));
+		return ma;
+	}
+	
+	@RequestMapping(value="alert")
+	public ModelAndView doalert(HttpServletResponse response) throws IOException{
+		
+		response.getWriter().write("<script type=\"text/javascript\">alert('test ok!');</script>");
+		
+		return null;
+	}
+	
+	
+}

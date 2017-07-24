@@ -1,0 +1,70 @@
+package springTest.web.controller;
+
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.AdminService;
+import springTest.web.service.PageMessageService;
+
+@Controller
+public class AdminController {
+
+	@Autowired
+	private AdminService service;
+
+	@RequestMapping(value="/login")
+	public ModelAndView login(String name, String password, String jumpto, HttpServletRequest request) throws NoSuchAlgorithmException{
+		ModelAndView mv = new ModelAndView();
+		if((null==name || name.trim().length()==0) &&( null==password || password.trim().length()==0)){
+			mv.setViewName("login");
+			if(null!=jumpto && jumpto.trim().length()!=0){
+				mv.addObject("jumpto",jumpto);
+			} else {
+				mv.addObject("jumpto",request.getContextPath()+"/index.html");
+			}
+		} else{
+			if(service.checkLogin(name, password)){
+				request.getSession().setAttribute("login", "login sucess");
+				mv.setViewName("sucess");
+				if(null!=jumpto && jumpto.trim().length()!=0){
+					mv.addObject("jumpurl",jumpto);
+				} else {
+					mv.addObject("jumpurl",request.getContextPath()+"/index.html");
+				}
+			} else {
+				mv=PageMessageService.addPageMessage(mv, PageMessageService.DANGER, "登录失败，用户名或者密码错误！");
+			}
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/changepassword")
+	public ModelAndView changepw(HttpServletRequest request, String oldpw, String password1, String password2) throws NoSuchAlgorithmException{
+		ModelAndView mv= new ModelAndView();
+		if(null == oldpw){
+			oldpw = "";
+		}
+		if(service.checkLogin("admin", oldpw)) {
+			if(null!=password1
+					&& password1.equals(password2)){
+				service.updatepw(password1);
+				mv.setViewName("sucess");
+				mv.addObject("jumpurl", request.getContextPath()+"/console&tabid=password");
+			}else{
+				mv.setViewName("failed");
+				mv.addObject("jumpurl", request.getContextPath()+"/console?error=两次输入的新密码不同！请重新输入。&tabid=password");
+			}
+		}else{
+			mv.setViewName("failed");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?error=原密码错误。&tabid=password");
+		}
+		return mv;
+	}
+	
+	
+}

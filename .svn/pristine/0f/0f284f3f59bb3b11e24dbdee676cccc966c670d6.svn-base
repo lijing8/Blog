@@ -1,0 +1,33 @@
+package springTest.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.entity.HelloWorldEntity;
+import springTest.web.service.HellowWorldService;
+
+
+
+@Controller
+@RequestMapping(value="/test1")
+public class HelloWorldController {
+	
+	@Autowired
+	private HellowWorldService hellowWorldService;
+
+	@RequestMapping(value="/helloworld")
+	public ModelAndView handleRequest() {
+		
+		HelloWorldEntity entity = hellowWorldService.getHelloWorld();
+		String rst = entity.getMessage();
+		
+		ModelAndView ma = new ModelAndView();
+		ma.setViewName("/welcome");
+		ma.addObject("result", rst);
+		
+		return ma;
+	}
+
+}

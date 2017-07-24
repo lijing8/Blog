@@ -1,0 +1,126 @@
+<%@ page language="java"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<!-- Meta, title, CSS, favicons, etc. -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+		<title>  
+			云环境下汽车制造业供应链服务发现与协同机制仿真平台
+		</title>
+		
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		
+		
+		<script type="text/javascript">
+		//等待dom元素加载完毕.
+			$(document).ready(function(){
+				
+				$("#header").load('header.jsp');
+				$("#footrow").load('footrow.jsp');
+				$("#sidebar").load('leftnav.jsp');
+			});			
+		</script> 
+
+		<!-- 自定义主题文件 -->
+		<link rel="stylesheet" href="css/MainCSS.css">
+		
+	</head>
+	<body>
+		<!-- 
+		整体页面分为三行：
+		
+		第一行一个12格全占作为head题头 
+		第二行左侧一个2格作为sidenavbar左侧导航栏；一个10格作为main页面，主要显示页面
+		第三行一个12格全占作为foot页脚
+		-->
+	
+		<div class="container-fluid">
+			<!--第一行 header-->
+			<div class="row">
+				<div id="header">
+					<div class="col-xs-12 header">
+						<h1>　　　　</h1>
+					</div>
+				</div>
+			</div>
+			<!--第二行 内容-->
+			<div class="row" id="main-part">
+				<!--左侧 导航-->
+				<div class="col-xs-2">
+					<div class="pinned" id="sidebar">
+					</div>
+				</div>
+				<div class="col-xs-10">
+					<!--面包屑导航-->
+					<ol class="breadcrumb pinned" >
+						<li><a href="index.html"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+						<!-- step1:根据当前编辑页面的具体路径层级编辑此处 -->
+						<!-- 
+							以下依次为从主页到达当前页面的路径（不含当前页面）
+							复制下一行代码数次，从上到下为从主页到当前页面的顺序
+							编辑每一行的herf的参数，指向该层级的初始页面
+							编辑页面名称
+						-->
+						<li><a href="#">示例</a></li>
+						<!-- 当前页面，修改页面名称即可 -->
+						<li class="active">页面模板</li>
+					</ol>
+					<!-- step2:根据当前编辑页面的具体内容编辑此处 -->
+					<h1>页面模板</h1>
+					<p>这是一个项目前台页面的框架页面，是一个静态原型页面，主要起到以下作用</p>
+					<ul>
+						<li>展示页面效果</li>
+						<li>介绍开发前台页面（静态原型）的过程</li>
+						<li>展示各种组件效果</li>
+						<li>介绍各种组件使用代码</li>
+					</ul>
+					
+
+
+
+				</div>
+			</div>
+			<!--第三行 foot-->
+			<div class="row">			
+				<div class="bg-info col-xs-12 text-center" id="footrow">
+					<small class="">页脚</small>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- PIN ALL THE THINGS! -->
+		<script src="js/jquery.pin.min.js"></script>
+		<script>
+			$(".pinned").pin({containerSelector: "#main-part", minWidth: 940,padding: {top: 15}});
+		</script>
+		
+		 
+	</body>
+</html>
+	

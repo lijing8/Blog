@@ -1,0 +1,8 @@
+SpringMVC+Spring+Hibernate全注解方式的解决方案测试用工程
+******************************************************************************
+解决GET方式乱码问题：
+在server工程中的server.xml中找到：
+<Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+修改为：
+<Connector  URIEncoding="UTF-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+

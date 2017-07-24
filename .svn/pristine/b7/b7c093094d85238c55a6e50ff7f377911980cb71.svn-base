@@ -1,0 +1,50 @@
+package springTest.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.CommentService;
+
+@Controller
+public class CommentController {
+
+	@Autowired
+	private CommentService service;
+
+	@RequestMapping("/savecomment")
+	public ModelAndView addComment(String blogid, String name , String email, String comment, HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		if(comment.length()>2000){
+			mv.setViewName("failed");
+			mv.addObject("jumpurl", request.getContextPath()+"/viewblog?id="+blogid+"&error=超出评论的字数限制。");	
+		} else if(name.length()>20){
+			mv.setViewName("failed");
+			mv.addObject("jumpurl", request.getContextPath()+"/viewblog?id="+blogid+"&error=超出称呼的字数限制。");	
+		} else {		
+			service.addComment(blogid, name, email, comment);
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/viewblog?id="+blogid);	
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/delcomment")
+	public ModelAndView delComment(String id , int blogid,HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			service.delComment(blogid, id);
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console?tabid=comments");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/delcomment?id="+id+"&blogid="+blogid);
+		}		
+		return mv;
+	}
+
+}

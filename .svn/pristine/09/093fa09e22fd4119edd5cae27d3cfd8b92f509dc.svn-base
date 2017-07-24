@@ -1,0 +1,127 @@
+package springTest.web.service;
+
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import springTest.web.dao.BlogDAO;
+import springTest.web.dao.ClassifyDAO;
+import springTest.web.entity.BlogEntity;
+
+@Service
+public class BlogService {
+
+	@Autowired
+	private BlogDAO dao;
+
+	@Autowired
+	private ClassifyDAO classifyDao;
+
+	/**
+	 * 保存博文
+	 * @param classifyid 文章分类编号
+	 * @param title 文章标题
+	 * @param body 文章内容
+	 */
+	public void saveBlog(int classifyid, String title,String body,int blogId,String isedit){
+		BlogEntity blog = new BlogEntity();
+
+		blog.setBlogTitle(title);
+
+		blog.setBlogBody(body);
+
+		blog.setBlogDate(new Date());
+
+		blog.setClassify(classifyDao.viewClassify(classifyid));
+		
+		blog.setViews(0);
+
+		String abs = new String(body);
+		abs.replace("\r", "");
+		abs.replace("\n", "");
+		abs=abs.replace("</p>", "\r\n");
+		abs=abs.replaceAll("<(.[^>]*)>","");
+		abs=abs.replace("&nbsp;", "");
+		abs=abs.replace(" ","");
+		abs=abs.replace("　", "");
+		if(body.length()>280){
+			abs = abs.substring(0,280);
+			abs=abs+"……";
+		}
+		blog.setBlogAbstract(abs);
+
+		String fiu = new String(body);
+		if(fiu.indexOf("img")!=-1){
+			fiu = fiu.substring(fiu.indexOf("img"));
+			fiu = fiu.substring(fiu.indexOf("src"));
+			fiu = fiu.substring(fiu.indexOf("\"")+1);
+			fiu = fiu.substring(0,fiu.indexOf("\""));
+		} else {
+			fiu=null;
+		}
+
+		blog.setFirstImgUrl(fiu);
+		if("true".equals(isedit)){
+			blog.setId(blogId);
+			dao.updateBlog(blog);
+		}else{
+			dao.addBlog(blog);
+		}
+	}
+
+	/**
+	 * 列出文章列表，每页文章数为10，静态成员变量维护
+	 * @param classifyid 文章分类，0代表全部文章
+	 * @param tarpage 目标页数
+	 * @return 文章列表
+	 */
+	public List<BlogEntity> getBloglist(String classifyid , String tarpage, String pagesize){
+		int cid=0;
+		if(null!=classifyid && classifyid.trim().length()!=0){
+			cid=new Integer(classifyid).intValue();
+		}
+		return dao.getBlogList(new Integer(tarpage).intValue(),new Integer(pagesize).intValue(), cid);
+	}
+
+	/**
+	 * 获取最大页数
+	 * @param classifyid 文章分类，0代表全部文章
+	 * @return 最大页数
+	 */
+	public Integer getMaxPage(String classifyid, String pageSize){
+		int cid=0;
+		int pagesize= new Integer(pageSize).intValue();
+		if(null!=classifyid && classifyid.trim().length()!=0){
+			cid=new Integer(classifyid).intValue();
+		}
+		int maxpage = (dao.getBolgNum(cid)+pagesize-1)/pagesize;
+		return new Integer(maxpage);
+	}
+
+	/**
+	 * 获取目标文章详情
+	 * @param id 文章id
+	 * @return 文章详情
+	 */
+	public BlogEntity getBlog(int id){
+		return dao.getBolg(id);
+	}
+
+	/**
+	 * 获取最新5篇文章列表
+	 * @return 5篇文章列表
+	 */
+	public List<BlogEntity> getTop5Blog(){
+		return dao.getTop5Blog();
+	}
+	
+	public void delBlog(int id){
+		dao.delBlog(id);
+	}
+	public void addviews(int id){
+		dao.addViews(id);
+	}
+}

@@ -1,0 +1,48 @@
+package springTest.web.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.HelloWorldEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class HelloWorldDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	
+
+
+	public List<HelloWorldEntity> getHelloworld(){
+		String HQL = "from HelloWorldEntity ";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		return q.list();
+	}
+	
+	public List<HelloWorldEntity> infHelloworld(String id){
+		String HQL = "from HelloWorldEntity h where h.id=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setString(0, id);
+		return q.list();
+	}
+	
+	public void addHelloWorld(HelloWorldEntity entity){
+		sessionFactory.getCurrentSession().save(entity);
+	}
+	
+	public boolean delHelloWorld(String id ){
+		String HQL = "delete HelloWorldEntity h where h.id=? ";
+		Query q=sessionFactory.getCurrentSession().createQuery(HQL);
+		q.setString(0, id);
+		return (q.executeUpdate()>0);		
+	}
+
+}

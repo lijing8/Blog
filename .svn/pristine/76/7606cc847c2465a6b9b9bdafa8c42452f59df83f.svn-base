@@ -1,0 +1,47 @@
+package springTest.web.service;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import springTest.web.dao.BlogDAO;
+import springTest.web.entity.BlogEntity;
+import springTest.web.entity.CommentEntity;
+
+@Service
+public class CommentService {
+	
+	@Autowired
+	private BlogDAO bd;
+	
+	public void addComment(String blogid, String name, String email, String comment){
+		CommentEntity entity = new CommentEntity();
+		BlogEntity be = bd.getBolg(new Integer(blogid).intValue());
+		entity.setPosterName(name);
+		entity.setPosterEMail(email);
+		entity.setComment(comment);
+		entity.setPostDate(new Date());
+		be.getComments().add(entity);
+		
+		bd.updateBlog(be);
+		//dao.saveComment(entity);
+	}
+	
+	
+	public void delComment(int blogid, String id){
+		BlogEntity be = bd.getBolg(blogid);
+		Set<CommentEntity> comms = be.getComments();
+		for( Iterator<CommentEntity> it = comms.iterator(); it.hasNext();){
+			CommentEntity ce = it.next();
+			if(ce.getId().equals(id)){
+				comms.remove(ce);
+				break;
+			}
+		}
+		bd.updateBlog(be);		
+	}
+	
+}

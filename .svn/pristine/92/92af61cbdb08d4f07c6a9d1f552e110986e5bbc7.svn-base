@@ -1,0 +1,30 @@
+package springTest.web.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import springTest.web.entity.HelloWorldEntity;
+
+@Repository
+@Transactional(rollbackOn = Exception.class)
+public class HelloWorldDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	
+
+	@SuppressWarnings("unchecked")
+	public List<HelloWorldEntity> getHelloworld(){
+		String HQL = "from HelloWorldEntity ";
+		Query q = sessionFactory.getCurrentSession().createQuery(HQL);
+		return (List<HelloWorldEntity>)q.list();
+	}
+
+}

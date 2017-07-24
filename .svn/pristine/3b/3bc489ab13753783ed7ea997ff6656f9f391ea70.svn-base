@@ -1,0 +1,43 @@
+package springTest.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.BlogService;
+
+@Controller
+@RequestMapping(value="/blog")
+public class BlogController {
+	
+	@Autowired
+	private BlogService service;
+	
+	@RequestMapping(value="/addblog.do")
+	public String addBlog(){
+		return "blogeditor";
+	}
+
+	@RequestMapping(value="/saveblog.do")
+	public ModelAndView saveBlog(String title,String textbody){
+		service.addBlog(title, textbody);
+		ModelAndView mv = new ModelAndView("sucess");
+		mv.addObject("jumpurl", "http://127.0.0.1:8080/SpringMVCTest/blog/listblog.do");
+		return mv;
+	}
+	
+	@RequestMapping(value="/listblog.do")
+	public ModelAndView listBlog(){
+		ModelAndView mv = new ModelAndView("bloglister");
+		mv.addObject("result", service.getBloglist());
+		return mv;
+	}
+	
+	@RequestMapping(value="/viewblog.do")
+	public ModelAndView viewblog(String id){
+		ModelAndView mv = new ModelAndView("blogviewer");
+		mv.addObject("blog", service.getBlog(id));
+		return mv;
+	}
+}

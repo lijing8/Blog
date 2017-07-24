@@ -1,0 +1,18 @@
+package springTest.web.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import springTest.web.dao.HelloWorldDao;
+import springTest.web.entity.HelloWorldEntity;
+
+@Service
+public class HellowWorldService {
+
+	@Autowired
+	private HelloWorldDao helloWorldDao;
+	
+	public HelloWorldEntity getHelloWorld(){
+		return helloWorldDao.getHelloworld().get(0);
+	}
+}

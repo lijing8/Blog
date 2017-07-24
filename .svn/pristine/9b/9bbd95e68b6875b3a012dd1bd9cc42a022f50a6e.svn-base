@@ -1,0 +1,42 @@
+package springTest.web.service;
+
+import java.sql.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import springTest.web.dao.BlogDAO;
+import springTest.web.entity.BlogEntity;
+
+@Service
+public class BlogService {
+
+	@Autowired
+	private BlogDAO dao;
+	
+	public void addBlog(String title,String body){
+		BlogEntity blog = new BlogEntity();
+		blog.setBlogTitle(title);
+		blog.setBlogBody(body);
+		blog.setBlogDate(new Date(new java.util.Date().getTime()));
+		String abs = new String(body);
+		if(body.length()>280){
+		 abs = abs.substring(0,280);
+		}
+		abs=abs.replace("<p>", "");
+		abs=abs.replace("</p>", "<br>");
+		abs=abs.substring(0,abs.lastIndexOf("<"));
+		blog.setBlogAbstract(abs+"бнбн");
+		dao.addBlog(blog);
+	}
+	
+	public List<BlogEntity> getBloglist(){
+		return dao.getBlogList();
+	}
+	
+	public BlogEntity getBlog(String id){
+		return dao.getBolg(id).get(0);
+	}
+	
+}

@@ -1,0 +1,47 @@
+package springTest.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import springTest.web.service.ClassifyService;
+
+@Controller
+public class ClassifyController {
+
+	@Autowired
+	private ClassifyService service;
+
+	@RequestMapping(value="/saveclassify")
+	public ModelAndView addClassify(String item, HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+		if(null!=item && item.trim().length()!=0){
+			service.addClassify(item);
+		}
+		mv.setViewName("sucess");
+		mv.addObject("jumpurl", request.getContextPath()+"/console&tabid=classifies");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console&tabid=classifies");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/delclassify")
+	public ModelAndView delClassify(HttpServletRequest request, int id){
+		ModelAndView mv = new ModelAndView();
+		if("login sucess".equals(request.getSession().getAttribute("login"))){
+			service.delClassify(id);
+			mv.setViewName("sucess");
+			mv.addObject("jumpurl", request.getContextPath()+"/console&tabid=classifies");
+		} else {
+			mv.setViewName("login");
+			mv.addObject("jumpto", request.getContextPath()+"/console&tabid=classifies");
+		}
+		return mv;
+	}
+}

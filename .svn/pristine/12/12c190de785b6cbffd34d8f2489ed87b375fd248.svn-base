@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
+	String hosturl = "http://127.0.0.1:8080/SpringMVCTest/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>博文详情-${blog.blogTitle } </title>
+
+<link href="<%=hosturl%>favicon.ico" rel="icon" type="image/x-icon" />
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="<%=hosturl%>css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="<%=hosturl%>css/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="<%=hosturl%>js/jquery-1.11.2.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="<%=hosturl%>js/bootstrap.min.js"></script>
+
+<!-- 自定义主题文件 -->
+<link rel="stylesheet" href="<%=hosturl%>css/MainCSS.css">
+
+</head>
+<body>
+<div class="container-fluid">
+		<!--第一行 header-->
+		<div class="row header">
+			<div class="col-xs-1">
+				<h2>logo</h2>
+			</div>
+			<div class="col-xs-10 header-title">
+				<h1>
+					演示用博客系统<small>副标题</small>
+				</h1>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<h1> ${blog.blogTitle }</h1><br>
+				<small>(撰写时间  ${blog.blogDate})</small>
+				<div>
+				 ${blog.blogBody }
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
